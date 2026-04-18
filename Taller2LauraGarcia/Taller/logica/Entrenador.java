@@ -1,31 +1,43 @@
 package logica;
 
+import java.util.ArrayList;
 
 public class Entrenador {
-	private String nombre; 
-	private  Pokemon equipoPokemones;
+    protected String nombre; 
+	protected ArrayList<Pokemon> equipoPokemones;
 	
 	
-	public Entrenador(String nombre, Pokemon equipoPokemones) {
+	public Entrenador(String nombre, ArrayList<Pokemon> equipoPokemones) {
 		this.nombre = nombre;
 		this.equipoPokemones = equipoPokemones;
 	}
 
 
-	public Entrenador(String nombre2, Pokemon equipoPokemones2) {
-		// TODO Auto-generated constructor stub
-	}
 
-
-	public String getNombre() {
+	public String getNombre()
+	{
 		return nombre;
 	}
-
-
-	public Pokemon getEquipoPokemones() {
-		return equipoPokemones;
-	} 
-
+    
 	
+	public ArrayList<Pokemon> getEquipoPokemones(){
+		return equipoPokemones;
+	}
+
+
+    public void mostrarEquipo(){
+
+
+	}
+	public boolean tienePokemoVido(){
+		boolean vivo = false;
+
+		return vivo;
+
+	}
+	public void obtenerPokemon(){
+
+
+	}
 	
 }

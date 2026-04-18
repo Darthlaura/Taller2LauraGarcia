@@ -3,10 +3,11 @@ package logica;
 
 public class Pokemon {
 	
-	private  String tipoPokemon; 
-	private Habitat habitat;
+	private String tipoPokemon; 
+	private String habitat;
 	private double porcentajeAparicion; 
 	private int vida; 
+	private int ataque;
 	private int defensa;
 	private int ataqueEspecial; 
 	private int defensaEspecial; 
@@ -15,13 +16,13 @@ public class Pokemon {
 	private boolean estado;
 	
 	
-	public Pokemon(String tipoPokemon, Habitat habitat, double porcentajeAparicion, int vida, int defensa,
+	public Pokemon(String tipoPokemon, String habitat, double porcentajeAparicion, int vida, int ataque, int defensa,
 			int ataqueEspecial, int defensaEspecial, int velocidad, String tipo) {
-		super();
 		this.tipoPokemon = tipoPokemon;
 		this.habitat = habitat;
 		this.porcentajeAparicion = porcentajeAparicion;
 		this.vida = vida;
+		this.ataque = ataque;
 		this.defensa = defensa;
 		this.ataqueEspecial = ataqueEspecial;
 		this.defensaEspecial = defensaEspecial;
@@ -36,7 +37,7 @@ public class Pokemon {
 	}
 
 
-	public Habitat getHabitat() {
+	public String getHabitat() {
 		return habitat;
 	}
 
@@ -48,6 +49,11 @@ public class Pokemon {
 
 	public int getVida() {
 		return vida;
+	}
+
+
+	public int getAtaque() {
+		return ataque;
 	}
 
 
@@ -78,8 +84,10 @@ public class Pokemon {
 
 	public boolean isEstado() {
 		return estado;
-	} 
+	}
 	
 	
-
+	
+	
 }
+	

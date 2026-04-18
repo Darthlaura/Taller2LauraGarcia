@@ -1,16 +1,38 @@
 package logica;
 
+import java.util.ArrayList;
+
 public class LiderGimnasio extends Entrenador  {
 	private int numeroA; 
-	private boolean estado;
-	private String nombre;
+	private String estado;
+	private int cantidadPokemones; 
+	private ArrayList<String> listaPokemones; 
 	
-	public LiderGimnasio(String nombre, Pokemon equipoPokemones, int numeroA, boolean estado, String nombre2) {
-		super(nombre, equipoPokemones);
+	public LiderGimnasio(int numeroA, String nombre, String estado, int cantidadPokemones, ArrayList<String> listaPokemones) {
+		super(nombre, new ArrayList<Pokemon>());
 		this.numeroA = numeroA;
 		this.estado = estado;
-		nombre = nombre2;
-	} 
+		this.cantidadPokemones= cantidadPokemones; 
+		this.listaPokemones= listaPokemones; 
+		
+	}
+
+	public int getNumeroA() {
+		return numeroA;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public int getCantidadPokemones() {
+		return cantidadPokemones;
+	}
+
+	public ArrayList<String> getListaPokemones() {
+		return listaPokemones;
+	}
+
 	
 	
 

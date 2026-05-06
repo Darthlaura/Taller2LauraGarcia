@@ -7,22 +7,14 @@ import java.io.FileNotFoundException;
 
 public class GestorArchivo {
 
-	private ArrayList<LiderGimnasio> listaLiderGym;
-	private ArrayList<AltoMando> listaAltoMando;
-	private ArrayList<Habitat> listaHabitat;
-	private ArrayList<Pokemon> listaPokemonesUsuario;
 
-	public GestorArchivo(ArrayList<LiderGimnasio> listaLiderGym, ArrayList<AltoMando> listaAltoMando,
-			ArrayList<Habitat> listaHabitat, ArrayList<Pokemon> listaPokemonesUsuario) {
 
-		this.listaLiderGym = listaLiderGym;
-		this.listaAltoMando = listaAltoMando;
-		this.listaHabitat = listaHabitat;
-		this.listaPokemonesUsuario = listaPokemonesUsuario;
+	public GestorArchivo() {
+
 	}
 
 	/**
-	 * metodo para leer el archivo que contriene los datos de altoMando
+	 * metodo para leer el archivo que contiene los datos de altoMando
 	 * 
 	 * @param nombreArchivo
 	 * @return retorna un ArrayList de tipo AltoMando
@@ -73,7 +65,7 @@ public class GestorArchivo {
 			int cantidadPokemones = Integer.parseInt(partes[3]);
 
 			ArrayList<String> listaPokemones = new ArrayList<String>();
-			for (int i = 0; i < cantidadPokemones; i++) {
+			for (int i = 4; i < partes.length; i++) {
 				String pokemonLeido = partes[i];
 				listaPokemones.add(pokemonLeido);
 			}
@@ -138,9 +130,9 @@ public class GestorArchivo {
 		Scanner lectura = new Scanner(archivo);
 
 		while (lectura.hasNextLine()) {
-			String linea = lectura.nextLine();
-			String[] partes = linea.split("");
-			String nombreHabitat = partes[0];
+		    String linea = lectura.nextLine();
+		    String nombreHabitat = linea;
+		    
 			Habitat h = new Habitat(nombreHabitat);
 			listaHabitatLectura.add(h);
 

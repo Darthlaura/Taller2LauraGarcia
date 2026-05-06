@@ -14,8 +14,7 @@ public class Entrenador {
 
 
 
-	public String getNombre()
-	{
+	public String getNombre(){
 		return nombre;
 	}
     
@@ -26,14 +25,47 @@ public class Entrenador {
 
 
     public void mostrarEquipo(){
+    	if (equipoPokemones.size() ==0) {
+    		System.out.println("No tienes pokemones en tu equipo");
+    		
+    	}else {
+    		System.out.println("Equipo Actual:");
+    		for (int i =0; i < equipoPokemones.size() && i < 6; i++) {
+    			Pokemon p = equipoPokemones.get(i);
+    			
+    			System.out.println((i+ 1) +") "
+    			+p.getTipoPokemon()
+    			+"| "+ p.getTipo()
+    			+ "| " + "Estado : " + p.getEstado() 
+    			+ "| Status totales: " + p.calcularStatusTotales());
+    			
+    			
+    		}
+    	}
 
 
 	}
 	public boolean tienePokemoVido(){
-		boolean vivo = false;
+		for( int i=0; i< equipoPokemones.size();i++) {
+			Pokemon p = equipoPokemones.get(i); 
+			if (p.getEstado().equalsIgnoreCase("Vivo")) {
+				return true;
+			}
+			
+		}
 
-		return vivo;
+		return false;
 
+	}
+	
+	public void curarPokemones() {
+		for(int i =0 ; i < equipoPokemones.size();i++) {
+			Pokemon p = equipoPokemones.get(i);
+			p.setEstado("Vivo"); // asignamos el estado a vivo 
+		}
+		
+		System.out.println("Tu equipo se ha recuperado");
+		
 	}
 	public void obtenerPokemon(){
 

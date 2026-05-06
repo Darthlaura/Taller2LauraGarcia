@@ -1,15 +1,52 @@
 package logica;
 
 import java.util.*;
+import java.io.*;
+import java.util.random.*;
+
+import sun.awt.dnd.SunDragSourceContextPeer;
+
+
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
-		boolean continuar = true; 
+		GestorArchivo gestor = new GestorArchivo(); 
+		ArrayList<Pokemon> pokedex = new ArrayList<Pokemon>();
+	    ArrayList<Habitat> habitats = new ArrayList<Habitat>(); 
+	    ArrayList<LiderGimnasio> gimnasios = new ArrayList<LiderGimnasio>(); 
+	    ArrayList<AltoMando> altoMando = new ArrayList<AltoMando>(); 
+	    
+	    
+	    try {
+	    	
+	    	
+	    	pokedex = gestor.abrirArchivoPokemon("Pokedex.txt"); 
+	    	habitats = gestor.abrirArchivoHabitat("habitat.txt"); 
+	    	gimnasios = gestor.abrirArchivoGym("gimnasios.txt"); 
+	    	altoMando = gestor.abrirArchivoAltoMando("altoMando.txt");
+	    	
+	    	
+	    	System.out.println("Archivos cargados correctamente. ");
+	    	System.out.println("Pokemones cargados:  " + pokedex.size());
+	    	System.out.println("Habitas cargados: " + habitats.size());
+	    	System.out.println("Gimnasios cargados: " + gimnasios.size());
+	    	System.out.println("Alto mando cargado: " + altoMando.size());
+	    	
+	    	
+	    } catch (FileNotFoundException e) {
+			System.out.println("Error al imprimir el archivo");
+		}
+		
+		
+	    boolean continuar = true; 
+		
+		
+		
 		
 		while(continuar) {
-			manejoMenu(teclado);
+			manejoMenu(teclado, pokedex, habitats, gimnasios, altoMando);
 			
 		}
 
@@ -62,27 +99,42 @@ public class Main {
 
 	}
 	
-	public static void manejoMenu(Scanner teclado) {
+	public static void manejoMenu(Scanner teclado, ArrayList<Pokemon> pokedex,ArrayList<Habitat> habitats,
+			ArrayList<LiderGimnasio> gimnasios, ArrayList<AltoMando> altoMado   ) {
 		
 		int entradaMenuPrincipal=0; 
 		
 		try {
 			entradaMenuPrincipal = retornoMenu(teclado); 
 			switch (entradaMenuPrincipal) {
-			case 1: {
+			/**case 1: {
 				boolean continuarMenu = true;
 				while (continuarMenu) {
 					boolean menuInterno; 
 				
-					menuInterno=controlMenuContinuar(teclado);
+					menuInterno=controlMenuContinuar(teclado, jugador);
 					if(menuInterno == false) {
 						continuarMenu = false; 
 						break; 
 					}
 				}
 			     break;
-			}
+			}*/
 			case 2: {
+				System.out.println("Ingresa Apodo: ");
+				String nombreJugador = teclado.nextLine();
+				
+				ArrayList<Pokemon> equipoJugador = new ArrayList<Pokemon>(); 
+				Jugador jugador = new Jugador(nombreJugador,0, equipoJugador);
+				System.out.println("Bienvenido " + jugador.getNombre() +  "!!");
+				boolean continuarMenu = true; 
+				
+				while (continuarMenu) {
+					continuarMenu = controlMenuContinuar(teclado,jugador);
+					
+				}
+				
+				
 				
 				break;
 			}
@@ -102,26 +154,26 @@ public class Main {
 		
 	}
 	
-	public static boolean controlMenuContinuar(Scanner teclado) {
+	public static boolean controlMenuContinuar(Scanner teclado, Jugador jugador, ArrayList<Pokemon> pokedex, ArrayList<Habitat> habitats) {
 		int entradaMenuContinuar=0;
 		boolean continuar= false;
 		try {
 			entradaMenuContinuar= menuContinuar(teclado); 
 			switch (entradaMenuContinuar) {
 			case 1: {
-				System.out.println("revisar equipo");
+				jugador.mostrarEquipo();
 				continuar = true ;  
 				return continuar;  
 			}
 			case 2: { 
 				System.out.println("salir a capturar mostrar sonas ");
-				// retorno de lista de habitad 
+			    salirACapturar(teclado, jugador, pokedex, habitats);
 				continuar = true ;  
 				return continuar;
 			}
 			case 3: {
 				System.out.println("cambiar el pokemon");
-				// ir al equipo 
+				accesoPc(teclado,jugador); 
 				continuar = true ;  
 				return continuar;
 			}
@@ -138,7 +190,7 @@ public class Main {
 				return continuar; 
 			}
 			case 6: {
-				System.out.println("Curar pokemon");
+				jugador.curarPokemones();
 				//esta funcion es del jugador 
 				continuar = true ;  
 				return continuar; 
@@ -150,8 +202,8 @@ public class Main {
 				return continuar;
 			}
 			case 8: {
-				System.out.println("guardar y salir");
-				return continuar;
+				System.out.println("Nos vemos Entrenador");
+				return false;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + entradaMenuContinuar);
@@ -169,4 +221,152 @@ public class Main {
 	}
 
 	}
+	
+	private static void accesoPc(Scanner teclado, Jugador jugador) {
+		ArrayList<Pokemon> pokemonesJugador = jugador.getEquipoPokemones(); 
+		
+		
+		if(pokemonesJugador.size() ==0) {
+			System.out.println("No tienes Pokemon capturados."); 
+			return; 
+			
+			
+		}
+		
+		System.out.println("Pokemones capturados: ");
+		for (int i =0; i < pokemonesJugador. size(); i++) {
+			Pokemon p = pokemonesJugador.get(i); 
+			System.out.println((1+1)+ ")" + p.getTipoPokemon() + "| " + p.getTipo() + "| " + p.getEstado());
+			System.out.println("Que desea hacer ?: ");
+			System.out.println("1) Cambiar Pokemon: ");
+			System.out.println("2) Salir: ");
+			System.out.println("Ingrese Opcion ");
+			
+			int opcionPc = Integer.valueOf(teclado.nextLine()); 
+	        if (opcionPc ==2) {
+	        	System.out.println("Saliendo del Pc....");
+	        	return; 
+	        
+	        }
+	        
+	        if(opcionPc != 1) {
+	        	System.out.println("Opcion fuera de rango.");
+	        	return;
+	        }
+			
+		}
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void salirACapturar(Scanner teclado, Jugador jugador, ArrayList<Pokemon> pokedex, ArrayList<Habitat> habitats) {
+		
+		System.out.println("Donde deseas ir a explorar?");
+		System.out.println("Zonas disponibles: ");
+		
+		
+		//validaciones 
+		for (int i= 0; i< habitats.size(); i++) {
+			System.out.println((i+1) + ")" + habitats.get(i).getZona() );
+			
+		}
+		System.out.println((habitats.size() + 1 ) + ") Volver al Menu" );  // volver al menu luego de imprimir la ultima zona 
+		
+		
+		//Zona elegida por el usuario
+		System.out.println("Ingrese Zona: ");
+		int opcionZona = Integer.valueOf(teclado.nextLine()); 
+		
+		if(opcionZona == habitats.size() +1) { 
+			System.out.println("Volviendo al menu....");  //muestra la opcion de volver al menu
+			return;
+		}
+		if (opcionZona < 1 || opcionZona > habitats.size()+1) {
+			System.out.println("Zona fuera del rango. ");
+			return;
+		}
+	
+		
+		Habitat habitastElegido = habitats.get(opcionZona - 1); 
+		String zonaElegida = habitastElegido.getZona(); 
+		
+		System.out.println("Elegiste explorar: " + zonaElegida );
+		
+		
+		ArrayList<Pokemon> pokemonesDeLaZona = new ArrayList<Pokemon>(); 
+		
+		for(int i =0; i < pokedex.size(); i++) {
+			Pokemon p = pokedex.get(i);
+			
+			if (p.getHabitat().equalsIgnoreCase(zonaElegida)) {
+				pokemonesDeLaZona.add(p);
+				
+				
+			}
+		}
+		
+		//si la lista esta vacia no hay pokemones que capturar 
+		if (pokemonesDeLaZona.size() ==0) {
+			System.out.println("No hay Pokemon en esta zona. ");
+			return; 
+			
+		}
+		Random random = new Random(); 
+		int posicionAleatoria = random.nextInt(pokemonesDeLaZona.size()); 
+		Pokemon pokemonEncontrado = pokemonesDeLaZona.get(posicionAleatoria); 
+		System.out.println("Ha aparecido un pokemon " + pokemonEncontrado.getTipoPokemon());
+		
+		System.out.println("Que deseas hacer? ");
+		System.out.println("1) Capturar");
+		System.out.println("2) Huir");
+		System.err.println("Ingrese Opcion"); 
+		
+		int opcionCaptura = Integer.valueOf(teclado.nextLine()); 
+		
+		if (opcionCaptura ==1) {
+			
+			if (jugador.tienePokemon(pokemonEncontrado.getTipoPokemon())){
+				System.out.println("Ya tienes este pokemon");
+				
+			}else {
+			
+			
+			jugador.agregarPokemon(pokemonEncontrado);
+			System.out.println(pokemonEncontrado.getTipoPokemon() + "Capturado ocn exito!!");
+			System.out.println(pokemonEncontrado.getTipoPokemon()+ "ha sido agregado a tu equipo ");
+			
+			
+			}
+			
+		} else if (opcionCaptura ==2) {
+			System.out.println("Has huido del Pokemon");
+			
+			
+		}else {
+			
+			System.out.println("Opcion fuera del rango.. ");
+		}
+		
+		
+		
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 }

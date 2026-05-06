@@ -13,7 +13,7 @@ public class Pokemon {
 	private int defensaEspecial; 
 	private int velocidad; 
 	private String tipo; 
-	private boolean estado;
+	private String estado;
 	
 	
 	public Pokemon(String tipoPokemon, String habitat, double porcentajeAparicion, int vida, int ataque, int defensa,
@@ -28,7 +28,7 @@ public class Pokemon {
 		this.defensaEspecial = defensaEspecial;
 		this.velocidad = velocidad;
 		this.tipo = tipo;
-		this.estado = false;
+		this.estado = "Vivo";
 	}
 
 
@@ -82,11 +82,21 @@ public class Pokemon {
 	}
 
 
-	public boolean isEstado() {
+	public String getEstado() {
 		return estado;
 	}
 	
 	
+	
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	//metodo para sumar las estadisticas del pokemon
+	public int calcularStatusTotales() {
+		return vida + ataque + defensa + ataqueEspecial + defensaEspecial + velocidad; 
+	}
 	
 	
 }

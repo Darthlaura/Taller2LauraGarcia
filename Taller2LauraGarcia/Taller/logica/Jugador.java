@@ -1,4 +1,7 @@
 package logica;
+//Autor: Laura Garcia 
+//Rut: 26427249-k
+//Paracelo c2 
 
 import java.util.ArrayList;
 

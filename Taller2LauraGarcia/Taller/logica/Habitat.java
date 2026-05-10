@@ -1,4 +1,7 @@
 package logica;
+//Autor: Laura Garcia 
+//Rut: 26427249-k
+//Paracelo c2 
 
 public class Habitat {
 	private String zona;
@@ -12,13 +15,5 @@ public class Habitat {
 		return zona;
 	}
 
-	
-	public static void obtenerPokemon() {
-		
-		
-	}
-	
-	
-	
 
 }

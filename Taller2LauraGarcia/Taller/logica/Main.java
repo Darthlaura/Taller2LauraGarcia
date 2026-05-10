@@ -1,6 +1,6 @@
 package logica;
 //Autor: Laura Garcia 
-//Rut: 26427249-k
+//Rut: 26427429-k
 //Paracelo c2 
 
 import java.util.*;
@@ -20,12 +20,12 @@ public class Main {
 		ArrayList<AltoMando> altoMando = new ArrayList<AltoMando>();
 
 		try {
-
+            //abrir los archivos
 			pokedex = gestor.abrirArchivoPokemon("Pokedex.txt");
 			habitats = gestor.abrirArchivoHabitat("habitat.txt");
 			gimnasios = gestor.abrirArchivoGym("gimnasios.txt");
 			altoMando = gestor.abrirArchivoAltoMando("altoMando.txt");
-
+             
 			System.out.println("Archivos cargados correctamente. ");
 			System.out.println("Pokemones cargados:  " + pokedex.size());
 			System.out.println("Habitas cargados: " + habitats.size());
@@ -47,7 +47,7 @@ public class Main {
 	}
 
 	/**
-	 * Metodo para retornar un inr para controlar el menu principal 
+	 * Metodo para retornar un int para controlar el menu principal 
 	 * @param teclado
 	 * @return int opcion
 	 * @throws IllegalArgumentException
@@ -105,7 +105,7 @@ public class Main {
 	}
 
 	/**
-	 * Metodo para el manejo del menu usuario
+	 * Metodo para el manejo del menu principal que engobla retorno de menu y menu continuar
 	 * 
 	 * @param teclado
 	 * @param pokedex
@@ -216,7 +216,7 @@ public class Main {
 	
 	
 	/**
-	 * Metodo paara controlar el menu del usuario para salir a capturar
+	 * Metodo para controlar el menu del usuario para salir a capturar
 	 * @param teclado
 	 * @param jugador
 	 * @param pokedex
@@ -299,7 +299,6 @@ public class Main {
 
 		}
 
-		// TODO: handle exception
 
 		continuar = true;
 		return continuar;

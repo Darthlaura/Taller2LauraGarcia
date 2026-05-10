@@ -1,4 +1,7 @@
 package logica;
+//Autor: Laura Garcia 
+//Rut: 26427429-k
+//Paracelo c2 
 
 import java.util.ArrayList;
 
@@ -83,9 +86,5 @@ public class Entrenador {
 		System.out.println("Tu equipo se ha recuperado");
 		
 	}
-	public void obtenerPokemon(){
 
-
-	}
-	
 }

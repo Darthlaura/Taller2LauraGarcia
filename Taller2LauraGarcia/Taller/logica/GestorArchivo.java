@@ -1,9 +1,16 @@
 package logica;
+//Autor: Laura Garcia 
+//Rut: 26427249-k
+//Paracelo c2 
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class GestorArchivo {
 
@@ -143,5 +150,68 @@ public class GestorArchivo {
 		return listaHabitatLectura;
 
 	}
+	
+	public void guardarPartida(String nombreArchivo, Jugador jugador) throws IOException {
+	    BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo));
 
+	    escritor.write(jugador.getNombre() + ";" + jugador.getCantidadMedallas());
+	    escritor.newLine();
+
+	    ArrayList<Pokemon> lista = jugador.getEquipoPokemones();
+
+	    for (int i = 0; i < lista.size(); i++) {
+	        Pokemon p = lista.get(i);
+
+	        escritor.write(p.getTipoPokemon() + ";" + p.getEstado());
+	        escritor.newLine();
+	    }
+
+	    escritor.close();
+	}
+
+	
+	public Jugador cargarPartida(String nombreArchivo, ArrayList<Pokemon> pokedex) throws FileNotFoundException {
+	    File archivo = new File(nombreArchivo);
+	    Scanner lectura = new Scanner(archivo);
+
+	    String primeraLinea = lectura.nextLine();
+	    String[] datosJugador = primeraLinea.split(";");
+
+	    String nombreJugador = datosJugador[0];
+	    int cantidadMedallas = Integer.parseInt(datosJugador[1]);
+
+	    ArrayList<Pokemon> pokemonesJugador = new ArrayList<Pokemon>();
+
+	    while (lectura.hasNextLine()) {
+	        String linea = lectura.nextLine();
+	        String[] partes = linea.split(";");
+
+	        String nombrePokemon = partes[0];
+	        String estadoPokemon = partes[1];
+
+	        Pokemon pokemonEncontrado = null;
+
+	        for (int i = 0; i < pokedex.size(); i++) {
+	            Pokemon p = pokedex.get(i);
+
+	            if (p.getTipoPokemon().equalsIgnoreCase(nombrePokemon)) {
+	                pokemonEncontrado = p;
+	            }
+	        }
+	        if (pokemonEncontrado != null) {
+	            Pokemon copiaPokemon = pokemonEncontrado.copiarPokemon();
+	            copiaPokemon.setEstado(estadoPokemon);
+	            pokemonesJugador.add(copiaPokemon);
+	        }
+	    }
+
+	    lectura.close();
+
+	    Jugador jugador = new Jugador(nombreJugador, cantidadMedallas, pokemonesJugador);
+
+	    return jugador;
+	}
+	
+	
+	
 }

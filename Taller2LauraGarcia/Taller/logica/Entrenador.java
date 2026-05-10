@@ -45,17 +45,33 @@ public class Entrenador {
 
 
 	}
-	public boolean tienePokemoVido(){
-		for( int i=0; i< equipoPokemones.size();i++) {
-			Pokemon p = equipoPokemones.get(i); 
-			if (p.getEstado().equalsIgnoreCase("Vivo")) {
-				return true;
-			}
-			
+	public boolean tienePokemoVivo(){
+		    for (int i = 0; i < equipoPokemones.size() && i < 6; i++) {
+		        Pokemon p = equipoPokemones.get(i);
+
+		        if (p.getEstado().equalsIgnoreCase("Vivo")) {
+		            return true;
+		        }
+		    }
+
+		    return false;
 		}
-
-		return false;
-
+	
+	
+	public Pokemon obtenerPrimerPokemonVivo() {
+		
+		for (int i =0; i  < equipoPokemones.size() && i < 6; i++) {
+			Pokemon p = equipoPokemones.get(i);
+			
+			if (p.getEstado().equalsIgnoreCase("Vivo")) {
+				return p;
+				
+			}
+		}
+		return null;
+		
+	
+	
 	}
 	
 	public void curarPokemones() {

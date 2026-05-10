@@ -18,7 +18,7 @@ public class Jugador  extends Entrenador {
         return cantidadMedallas;
     }
  
-    	public void setCantidadMedalla( int cantidadMedallas) {
+    	public void setCantidadMedallas( int cantidadMedallas) {
     		this.cantidadMedallas  = cantidadMedallas; 
     		
     	}
@@ -27,6 +27,29 @@ public class Jugador  extends Entrenador {
     		equipoPokemones.add(pokemon); 
     		
     }
+    	
+    	
+    	public boolean tienePokemon(String nombrePokemon) {
+    		for (int i =0; i< equipoPokemones.size(); i++) {
+    			
+    			Pokemon p = equipoPokemones.get(i); 
+    			if (p.getTipoPokemon().equalsIgnoreCase(nombrePokemon)) {
+    				return true;
+    				
+    			}
+    			
+    			
+    		}
+    		return false;
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     
     
 

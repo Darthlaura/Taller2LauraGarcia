@@ -33,7 +33,15 @@ public class LiderGimnasio extends Entrenador  {
 		return listaPokemones;
 	}
 
-	
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public void marcarComoDerrotado() {
+		this.estado = "Derrotado"; 
+		
+		
+	}
 	
 
 }

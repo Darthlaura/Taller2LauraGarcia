@@ -31,6 +31,7 @@ public class Pokemon {
 		this.estado = "Vivo";
 	}
 
+	
 
 	public String getTipoPokemon() {
 		return tipoPokemon;
@@ -88,6 +89,7 @@ public class Pokemon {
 	
 	
 	
+	
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
@@ -99,5 +101,25 @@ public class Pokemon {
 	}
 	
 	
+	
+	
+	public Pokemon copiarPokemon() {
+	    Pokemon copia = new Pokemon(
+	            this.tipoPokemon,
+	            this.habitat,
+	            this.porcentajeAparicion,
+	            this.vida,
+	            this.ataque,
+	            this.defensa,
+	            this.ataqueEspecial,
+	            this.defensaEspecial,
+	            this.velocidad,
+	            this.tipo
+	    );
+
+	    copia.setEstado(this.estado);
+
+	    return copia;
+	}
 }
 	
